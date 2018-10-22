@@ -1,0 +1,55 @@
+<head>
+	<title>Editer le profile | discordbot.takohell.com</title>
+	<% include ./partials/head %>
+</head>
+<body>
+	<% include ./partials/header %>
+	
+	<div class="jumbotron">
+		<div class="container">
+			<p class="lead code"> Editions du profil de <%= user.username %>
+			</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="from">
+					<form method="post">
+						<div class="form-group">
+							<label for="id">Votre ID</label>
+							<input type="text" id class="form-control" disabled value="<%=user.id%>" maxlength="70" placeholder="Votre ID non modifiable" required pattern="\d+">
+						</div>
+						<div class="form-group">
+							<label for="bio">Votre bio</label>
+							<input type="text" name="bio" id="bio" class="form-control" maxlength="200" placeholder="Votre bio" <%if(test){%> <%if(test.bio){%> value="<%=test.bio%>" <%}%><%}%> required>
+						</div>
+						<div class="form-group">
+							<label for="github">Votre Github</label>
+							<input type="text" name="github" id="github" class="form-control" maxlength="200" placeholder="Votre Github" <%if(test){%> <%if(test.github){%> value="<%=test.github%>" <%}%><%}%>>
+						</div>
+						<div class="form-group">
+							<label for="youtube">Youtube</label>
+							<input type="text" name="youtube" id="youtube" class="form-control" maxlength="200" placeholder="Youtube" <%if(test){%> <%if(test.youtube){%> value="<%=test.youtube%>" <%}%><%}%>>
+						</div>
+						<div class="form-group">
+							<label for="twitter">Twitter</label>
+							<input type="text" name="twitter" id="twitter" class="form-control" maxlength="200" placeholder="Twitter" <%if(test){%> <%if(test.twitter){%> value="<%=test.twitter%>" <%}%><%}%>>
+						</div>
+						<div class="form-group">
+							<label for="facebook">Facebook</label>
+							<input type="text" name="facebook" id="facebook" class="form-control" maxlength="200" placeholder="Facebook" <%if(test){%> <%if(test.facebook){%> value="<%=test.facebook%>" <%}%><%}%>>
+						</div>
+						<div class="form-group">
+							<label for="background">Votre fond d"écran personnaliser (HTTPS seulement)</label>
+							<input type="text" name="background" id="background" class="form-control" maxlength="200" placeholder="Votre fond d'écran personnaliser" <%if(test){%> <%if(test.background){%> value="<%=test.background%>" <%}%><%}%>>
+						</div>
+						<button class="btn btn-primary" type="submit">Envoyer</button>
+						<input type="text" class="hide" name="<%=csrf%>" value="<%=csrf%>">
+						<input type="text" class="hide" name="id" value="<%=user.id%>">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

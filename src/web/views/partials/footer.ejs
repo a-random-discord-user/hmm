@@ -1,0 +1,16 @@
+<footer class="body">
+	© Silver Crow 2017 &nbsp;|&nbsp; <a href="mailto:jorisvideo@outlook.fr">Contact</a> &nbsp;|&nbsp; <a href="/tos">ToS</a><br>
+	Fabriqué avec <a href="http://ejs.co" target="_blank">ejs</a> | <a href="https://github.com/janl/mustache.js/" target="_blank">Moustache.js</a></footer>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io("/");
+
+		var visitorData = {
+			referringSite: document.referrer,
+			page: location.pathname
+		}
+		socket.emit('visitor-data', visitorData);
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/js/menu.js" type="text/javascript" charset="utf-8" async defer></script>
+</html>

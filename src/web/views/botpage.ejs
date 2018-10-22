@@ -1,0 +1,144 @@
+<head>
+	<title>Discord Bot FR | Discord.takohell.com</title>
+	<meta name="author" content="<%=botinfo.ownerinfo%>">
+	<meta name="og:image" content="<%=(botinfo.avatar || '/img/kyonna.png')%>">
+	<meta property="og:title" content="<%=botinfo.name%>">
+	<%if(botinfo.shortDesc){%>
+	<meta property="og:description" content="<%=botinfo.shortDesc%>">
+	<% }%>
+	<meta property="og:site_name" content="Discord.takohell.com">
+	<% include ./partials/head %>
+</head>
+<body>
+	<% include ./partials/header %>
+	<div class="content<%= theme == 1 ? '-dark' : ''%>">
+		<div style="background-image: url(../img/patternmid.png)">
+			<div class="jumbotron">
+				<div class="container">
+					<div class="media center">
+						<img src="<%=(botinfo.avatar+'.png' || '/img/kyonna.png')%>" width="128" height="128"  alt="Erreur d'avatar" class="d-flex mr-3 r-50">
+					</div>
+					<h1 class="mt-0 center" style="<%= theme == 1 ? 'color: #FFF' : 'color: #000'%> "> <%=botinfo.name%></h1>
+					<div class='center'>
+						<%if (botinfo.status){%>
+						<% if (botinfo.status == "online") {%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> green button" style="
+							margin-top: 2px;">
+							<%- botinfo.status%>
+						</span>
+						<%}else if(botinfo.status == "offline"){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> grey button" style="
+							margin-top: 2px;">
+							<%- botinfo.status%>
+						</span>
+						<%}else if (botinfo.status == "dnd"){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> red button" style="
+							margin-top: 2px;">
+							<%- botinfo.status%>
+						</span>
+						<%}else if(botinfo.status == "idle"){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> orange button" style="
+							margin-top: 2px;">
+							<%- botinfo.status%>
+						</span>
+						<%} %>
+						
+						<%}%>
+						<%if (botinfo.count){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> orange button left"><%= botinfo.count%> serveurs</span>
+						<%}%>
+						<% if(botinfo.shard){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> blue button left"><%= botinfo.shard%> Shards</span>
+						<%}%>
+						<%if (!botinfo.approved){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> red button left">Non vérifier</span>
+						<%}%>
+						<%if (botinfo.lib){%>
+						<span class="tiny ui <%= theme == 1 ? 'inverted' : ''%> red button left"><%= botinfo.lib %></span>
+						<%}%>
+						<%if(botinfo.prefix){%>
+						<div class="center" style="<%= theme == 1 ? 'color: #FFF' : 'color: #000'%> ">
+							<p id="prefix">	Prefix: <strong><%=botinfo.prefix%></strong>
+							</p>
+						</div>
+						<%}%>
+						<%if (botinfo.ownerinfo){%>
+						
+						<%for (var i=0; i<owners.length; i++) {%>
+						<% var val = owners[i]; %>
+						<span class="badge badge-info left"><a href="/user/<%=val.id%>" style="color: #FFF"><img src="https://cdn.discordapp.com/avatars/<%=val.id%>/<%=val.avatar %>.png" alt="Erreur d'avatars" class="avatar-user"> <%=val.username%>#<%=val.discriminator %></a></span>
+						<%}%>
+					</div>
+					
+					<%} %>
+					<%if(botinfo.shortDesc){%>
+					<br>
+					<div class="center" style="margin-bottom: 10px;<%= theme == 1 ? 'color: #FFF' : 'color: #000'%> ">
+						<%= botinfo.shortDesc%>
+					</div>
+					<% }%>
+					<div class="center">
+						<%if (user && user.admin){%>
+						<%if (!botinfo.approved && csrf){%>
+						<form action="/bot/<%=botinfo.id%>/approve" class="buddon" method="POST">
+							<button type="submit" class="tiny ui <%= theme == 1 ? 'inverted' : ''%> green button">Approuver</button>
+							<input type="text" name="id" id="id" class="hide" value="<%=botinfo.id%>">
+							<input type="text" name="csrf" id="csrf" class="hide" value="<%={csrf}%>">
+							<input type="text" name="approve" id="approve" class="hide" value="true">
+						</form>
+						<%}%>
+						<%if (user.admin){ %>
+						<a class="ui compact <%= theme == 1 ? 'inverted' : ''%> red labeled icon button" style="margin-top: 5px;" href="/bot/<%=botinfo.id%>/remove">
+							<i class="ban icon"></i>
+							Rejeter / sup
+						</a>
+						<a class="ui compact blue <%= theme == 1 ? 'inverted' : ''%> labeled icon button" style="margin-top: 5px;" href="https://discordapp.com/oauth2/authorize?client_id=<%=botinfo.id%>&scope=bot&permissions=0&guild_id=344955119005073409" target="_blank">
+							<i class="mouse pointer icon"></i>
+							Inviter sans permissions
+						</a>
+						
+						<%} %>
+						<%}%>
+						<%if (botinfo.editable){%>
+						<a class="ui compact blue <%= theme == 1 ? 'inverted' : ''%> labeled icon button" style="margin-top: 5px;" href="/bot/<%=botinfo.id%>/edit">
+							<i class="pencil square icon"></i>
+							Editer
+						</a>
+						<a class="ui compact red  <%= theme == 1 ? 'inverted' : ''%> labeled icon button" style="margin-top: 5px;" href="/bot/<%=botinfo.id%>/delete">
+							<i class="trash o icon"></i>
+							Supprimer
+						</a>
+						<a class="ui compact blue <%= theme == 1 ? 'inverted' : ''%> labeled icon button" style="margin-top: 5px;" href="/bot/<%=botinfo.id%>/token">
+							<i class="lock icon"></i>
+							Token
+						</a>
+						<%}%>
+						<a class="ui compact blue labeled <%= theme == 1 ? 'inverted' : ''%> icon button" style="margin-top: 5px;" href="<%=botinfo.invite%>">
+							<i class="mouse pointer icon"></i>
+							Inviter
+						</a>
+						<%if(botinfo.website){%>
+						<a class="ui compact white labeled <%= theme == 1 ? 'inverted' : ''%> icon button" style="margin-top: 5px;" href="<%= botinfo.website%>">
+							<i class="globe icon"></i>
+							Site web
+						</a>
+						<%}%>
+						<%if(botinfo.github){%>
+						<a class="ui compact white labeled <%= theme == 1 ? 'inverted' : ''%> icon button" style="margin-top: 5px;" href="<%= botinfo.github%>">
+							<i class="github icon"></i>
+							Github
+						</a>
+						<%}%>
+					</div>
+				</div>
+			</div>
+			<div class="container" style="padding-top: 10px; padding-bottom: 10px; <%= theme == 1 ? 'color: #FFF' : 'color: #000'%> ">
+				<div class="col-12">
+					<%-render%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<% include ./partials/footer %>

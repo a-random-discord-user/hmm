@@ -1,0 +1,27 @@
+<header>
+  <nav class="<%= theme == 1 ? 'nav-dark' : ''%>">
+    <a id="resp-menu" class="responsive-menu <%= theme == 1 ? 'responsive-menu-dark' : ''%>" href="#"><i class="fa fa-reorder"></i> Menu</a>
+    <ul class="menu">
+      <li><a href="/" class="<%= theme == 1 ? 'dark' : ''%> homer"><i class="fa fa-home"></i> Liste</a></li>
+      <% if (user) { %>
+      <% if (user.admin) {%>
+      <li><a href="/list/queue" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-home"></i> En attente</a></li>
+      <li><a href="/stats" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-bar-chart"></i> Stats</a></li>
+      <%}%>
+      <li><a  href="javascript:void(0)" class="<%= theme == 1 ? 'dark' : ''%>"><%= user.username %></a>
+      <ul class="sub-menu">
+        <li><a href="/user/<%= user.id %>" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-user"></i> Profil</a></li>
+        <li><a href="/bot/add" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-terminal"></i> Ajouter </a></li>
+        <li><a href="/auth/logout" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-sign-out"></i> Se déconnecter</a>
+      </li>
+    </ul>
+  </li>
+  <% }else{ %>
+  <li><a href="/auth" class="<%= theme == 1 ? 'dark' : ''%>" target="_blank"><span class="fa fa-sign-in"></span> Se connecter</a></li>
+  <% } %>
+  <li><a href="/docs" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-question-circle"></i> API</a></li>
+  <li><a href="<%=listinvite%>" class="<%= theme == 1 ? 'dark' : ''%>" target="_blank"><i class="fa fa-gift"></i> Rejoindre le serveur</a></li>
+  <li class="menu-right"><a href="/theme" class="<%= theme == 1 ? 'dark' : ''%>"><i class="fa fa-gear"></i> Changer de thème</a></li>
+</ul>
+</nav>
+</header>

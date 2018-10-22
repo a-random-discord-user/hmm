@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Discord bot list FR</title>
+		<meta property="og:title" content="Doc | Discord bot FR">
+		<meta property="og:description" content="Doc officiel de discord bot FR">
+		<% include ./partials/head %>
+		<link rel="stylesheet" href="/pl/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/pl/prism/prism.css">
+		<link id="theme-style" rel="stylesheet" href="/css/styles.css">
+	</head>
+	<body class="body-green">
+		<% include ./partials/header %>
+	<div class="<%= theme == 1 ? 'presentation-dark' : 'presentation-light'%>" style="margin-top: -10px">
+		<div style="background-image: url(../../img/patternmid.png);>		
+		<div class="page-wrapper">
+			<div class="doc-wrapper">
+				<div class="container">
+					<div class="doc-body">
+						<div class="doc-content">
+							<div class="content-inner">
+								<section id="api" class="doc-section">
+									<h2 class="section-title">API</h2>
+									<div>
+										<h6>API</h6>
+										<p>
+											Les Tokens sont unique pour chaque bot. Consultez le token de votre robot en recherchant votre bot et en cliquant sur le bouton Token.<br>
+											Toute les requêtes utilise le JSON.<br>
+											Envoyez les requêtes POST avec <code class="language-json" style="color: red">Content-Type: application/json</code> avec JSON valide dans le body.<br>
+											Lorsque le token est requis, ajoutez votre token à votre header <code class="language-json" style="color: red">Authorization</code> HTTPS.<p>
+												<br>
+												<pre><code class="language-json" style="color: red">Authorization: dEFr533eabfa62516a549f7b11678962ec00f8999537</code></pre>
+												
+											</div>
+											<div id="methode" class="section-block">
+												<div class="code-block">
+													<h6>V1 Méthodes</h6>
+													<code class="language-json" style="color: red">https://discordbot.takohell.com/api/v1/
+													</code>
+													<br>
+													<br>
+													<code class="language-json" style="color: red">https://discordbots.fr/api/v1/</code>
+												</div>
+											</div>
+											<div id="botget" class="section-block">
+												<h6>GET <code class="language-json" style="color: red">/api/v1/bot/:id</code></h6>
+												<p>Obtenir un objet pour un bot spécifique</p>
+												<details><summary>Format de body de réponse :</summary>
+												<pre><code class="language-json">{
+    "approved":false,           //ou true si le bot est validé
+    "avatar":"lien de l'avatar",
+    "count":0,                 //nombre de serveurs, 0 si pas spécifié.
+    "descitype":"",            //la longue description
+    "github":"Github du bot",  //prend la valeur `null` si n'a pas.
+    "id":"XXXXXXXXXX",         //ID du bot
+    "invite":"Lien d'invitation avec permission",
+    "lib":"discord.js",        //librairie discord utilisé dans le code du bot
+    "name":"NomDuBot",
+    "owner":["XXXXXXXXXX"],    //Array, ID de son/ses créateur(s)
+    "prefix":"PrefixDuBot",
+    "shard":0,                 //nombre de shards, 0 si pas spécifié.
+    "shortDesc":"Description Courte",
+    "timestamp":12312313215,   //Timestamp d'ajout du bot à la liste.
+    "website":"Site Du Bot"    //prend la valeur `null` si n'a pas.
+}</code></details>
+											</div>
+											<div id="botpost" class="section-block">
+												<h6>POST <code class="language-json" style="color: red">/api/v1/bot/:id</code> token requis</h6>
+												<p>Mettez à jour le compteur des serveurs de votre bot!
+												<br>Mettez à jour le compteur des shard de votre bot! (optionnelle)</p>
+												<pre><code class="language-json">{
+	"count": 8520,
+	"shard": 0
+}</code></pre>
+											<p>Vous pouvez aussi utilisez cette méthode.</p>
+											<pre><code class="language-json">{
+	"server_count": 8520,
+	"server_shard": 0
+}</code></pre>
+											</div>
+											<h2 class="section-title">Exemples</h2>
+											<div id="exemple" class="section-block">
+												<h6>Exemples d'utilisation </h6>
+												<br>
+												<div id="GOT" class="section-block">
+												<p>Avec GOT :</p>
+												<pre><code class="language-javascript">got(`https://discordbot.takohell.com/api/v1/bot/${client.user.id}`, {
+  method: 'POST',
+  headers: {
+    Authorization: 'token Discord Bot liste FR',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ server_count: client.guilds.size })
+}).then(() => {
+   console.log(`[Discord Bot liste Fr] = Ok`)
+});</code></pre><br>
+</div>
+<div id="snekfetch" class="section-block">
+<p>Avec snekfetch: </p>
+<pre><code class="language-javascript">snekfetch.post(`https://discordbots.fr/api/v1/bot/${client.user.id}`,{
+	  headers: { Authorization: 'token Discord Bot liste FR' }})
+      .send({ server_count: client.guilds.size})
+      .catch(r => console.log('[Discordbot.takohell.com] Impossible d\'Update!', r.body));</code></pre>
+</div>
+<br>
+<div id="cssavatar" class="section-block">
+<p>Avatar animées (qui bouge) :</p>
+<pre><code class="language-css">.d-flex.mr-3.r-50{
+    -webkit-animation-name: Floatingx;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-name: Floating;
+    -moz-animation-duration: 4s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in-out;
+}
+@-webkit-keyframes Floatingx{
+    from {-webkit-transform:translate(0, 0px);}
+    65% {-webkit-transform:translate(0, 15px);}
+    to {-webkit-transform: translate(0, -0px);}    
+}
+    
+@-moz-keyframes Floating{
+    from {-moz-transform:translate(0, 0px);}
+    65% {-moz-transform:translate(0, 15px);}
+    to {-moz-transform: translate(0, -0px);}    
+}</code></pre>
+</div>
+<div id="csspage" class="section-block">
+<p>Page entiere :</p>
+<pre><code class="language-css"><link rel="stylesheey" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+<style>.d-flex.mr-3.r-50 {
+-webkit-animation-name: Floatingx;
+-webkit-animation-duration: 4s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-timing-function: ease-in-out;
+-moz-animation-name: Floating;
+-moz-animation-duration: 4s;
+-moz-animation-iteration-count: infinite;
+-moz-animation-timing-function: ease-in-out;
+}
+@-webkit-keyframes Floatingx {
+from {
+-webkit-transform:translate(0, 0px);
+}
+65% {
+-webkit-transform:translate(0, 15px);
+}
+to {
+-webkit-transform:translate(0, -0px);
+}
+}
+@-moz-keyframes Floatingx {
+from {
+-moz-transform:translate(0, 0px);
+}
+65% {
+-moz-transform:translate(0, 15px);
+}
+to {
+-moz-transform:translate(0, -0px);
+}
+}
+body {
+font-family: 'Open Sans', sans-serif;
+font-weight: 300;
+line-height: 1.42em;
+color: #ffffff;
+background-color:#202020;
+background-size: cover;
+background-attachment: fixed;
+min-height: 100%;
+position: relative;
+}
+h1 {
+font-size:3em;
+font-weight: 300;
+line-height:1em;
+text-align: center;
+color: #dd4b39;
+}
+h2 {
+font-size:1em;
+font-weight: 300;
+text-align: center;
+display: block;
+line-height:1em;
+padding-bottom: 2em;
+color: #ffffff;
+}
+h2 a {
+font-size:1em;
+font-weight: 400;
+text-align: center;
+text-transform: uppercase;
+color: #185875;
+text-decoration: none;
+}
+.blue {
+color: #185875;
+}
+.yellow {
+color: #FFF842;
+}
+.green {
+color: #21ba45;
+}
+.red {
+color: #dd4b39;
+}
+.blanc {
+color: #ffffff;
+}
+</style>
+<h2>Nouvelle commandes : <span class="red">Youtube, Google, Feedback</span></h2>
+<h2>Akane est un bot multifonction au préfixe configurable qui et capable de répondre dans les catégories suivantes => [<span class="red">Modération, Fun, Social, Utilitaire,
+Information, NSFW</span>] bien que le bot dispose d'une quantité correcte de commandes il n'est qu'au début de son développement alors des ajouts et des changements
+sont à prévoir dans le futur.</h2>
+<HR>
+Liste des commandes:
+<HR>
+<br>
+<p><span class="red">Réglage:</span> prefix, inv</p>
+<br>
+<p><span class="red">Modération:</span> ban, kick, lockdown, role, mute, prune</p>
+<br>
+<p><span class="red">Fun:</span> neko, crime, roll, kill, hug, gif, cookie, dice, coinflip, ascii, binaire, cat, dog, peche, slot, ini, rate</p>
+<br>
+<p><span class="red">Information:</span> ping, uinfo, avatar, sinfo, channel, membre, etat, calc</p>
+<br>
+<p><span class="red">Utilitaire:</span> emoji, irole, iemoji, iserv, ichannel, afk, google</p>
+<br>
+<p><span class="red">Social:</span> anime, dex, meteo, say, love, wanted</p>
+<br>
+<p><span class="red">NSFW:</span> ass, boobs, hentai</p>
+<br>
+<p><span class="red">Bot:</span> about, join, feedback, help</p>
+<br>
+<HR>
+<br>
+<h2><span class="red">Le code de cette page peut être utilisé pour vous aider à faire votre présentation</span></h2>
+<br>
+<p><span class="red">Merci à Kami-sama(Joris vidéo) de m'avoir expliqué une soirée les bases du HTML.</span></p></code></pre>
+</div>
+											</div>
+
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+						<div class="doc-sidebar hidden-xs">
+							<nav id="doc-nav">
+								<ul id="doc-menu" class="nav doc-menu" data-spy="affix">
+									<li>
+										<a class="scrollto" href="#api">API</a>
+										<ul class="nav doc-sub-menu">
+											<li><a class="scrollto" href="#methode">Méthodes</a></li>
+											<li><a class="scrollto" href="#botget">GET</a></li>
+											<li><a class="scrollto" href="#botpost">POST</a></li>
+										</ul>
+										<a class="scrollto" href="#exemple">Exemples</a>
+										<ul class="nav doc-sub-menu">
+											<li><a class="scrollto" href="#GOT">GOT</a></li>
+											<li><a class="scrollto" href="#snekfetch">snekfetch</a></li>
+											<li><a class="scrollto" href="#cssavatar">CSS avatar</a></li>
+											<li><a class="scrollto" href="#csspage">CSS page</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		
+		<script type="text/javascript" src="/pl/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/pl/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/pl/prism/prism.js"></script>
+		<script type="text/javascript" src="/pl/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+		<script type="text/javascript" src="/pl/jquery-match-height/jquery.matchHeight-min.js"></script>
+		<% include ./partials/footer %>
+	</body>
+</html>

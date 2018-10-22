@@ -1,0 +1,124 @@
+<head>
+	<title>Editer | Discordbot.takohell.com</title>
+	<% include ./partials/head %>
+	<script type="text/javascript" src="/js/codemirror.js"></script>
+	<script type="text/javascript" src="/js/xml.js"></script>
+	<script type="text/javascript" src="/js/javascript.js"></script>
+	<script type="text/javascript" src="/js/css.js"></script>
+	<script type="text/javascript" src="/js/htmlmixed.js"></script>
+	<script type="text/javascript" src="/js/show-hint.js"></script>
+	<script type="text/javascript" src="/js/xml-hint.js"></script>
+	<script src="/js/html-hint.js" type="text/javascript" charset="utf-8" async defer></script>
+	<link rel="stylesheet" type="text/css" href="/css/default/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="/css/default/midnight.css">
+	<style>
+	.CodeMirror {
+	height: auto;
+	}
+	</style>
+</head>
+<body>
+	<% include ./partials/header %>
+	
+	<div class="<%= theme == 1 ? 'presentation-dark' : 'presentation-light'%>">
+		<div style="background-image: url(../../img/patternmid.png)">
+			<div class="jumbotron">
+				<div class="container">
+					<p class="lead code <%= theme == 1 ? 'dark' : ''%>"> Editer <%= bot.name %>
+					</p>
+				</div>
+			</div>
+			<div class="container <%= theme == 1 ? 'dark-' : ''%>">
+				<div class="row">
+					<div class="col-12">
+						<div class="from">
+							<form method="post">
+								<div class="form-group">
+									<label for="id">bot ID</label>
+									<input type="text" id class="form-control" disabled value="<%=bot.id%>" maxlength="70" placeholder="ID du bot" required pattern="\d+">
+								</div>
+								<div class="form-group">
+									<label for="name">Nom personnalisé</label>
+									<input value="<%=bot.name%>" type="text" name="name" maxlength="32" placeholder="(Optionnel) inserer le nom" id="name" class="form-control">
+								</div>
+								
+								<div class="form-group">
+									<label for="avatar">URL d'avatar personnalisée </label>
+									<input type="text" id="avatar" name="avatar" value="<%=bot.avatar%>" class="form-control" maxlength="2000" placeholder="(Optionnel) https:// - Laisser vide pour utiliser l'invitation de Discord" pattern="https:\/\/.+">
+								</div>
+								<div class="form-group">
+									<label for="invite">URL d'invitation personnalisée <a href="https://discordapi.com/permissions.html" target="_blank">[Permissions Calculator]</a></label>
+									<input type="text" id="invite" name="invite" value="<%=bot.invite%>" class="form-control" maxlength="2000" placeholder="(Optionnel) http:// ou https:// - Doit redirigé vers https://discordapp.com/" pattern="https?:\/\/.+">
+								</div>
+								<div class="form-group">
+									<label for="shortDesc">Description courte (description)</label>
+									<input type="text" name="shortDesc" id="shortDesc" class="form-control" maxlength="200" placeholder="Insérer une description courte" value="<%=bot.shortDesc%>"  required>
+								</div>
+								<div class="form-group">
+									<label for="prefix">Prefix</label>
+									<input type="text" id="prefix" class="form-control" value="<%=bot.prefix%>"  name="prefix" maxlength="200" placeholder="Ajouter un prefix" required>
+								</div>
+								<div class="form-group">
+									<label for="owners">Owners</label>
+									<input type="text" id="owners" name="owners" class="form-control" maxlength="200" value="<%= owner %>" placeholder="Autre Owners (à ajouter si il y en as d'autres que vous)">
+								</div>
+								<div class="form-group">
+									<label for="category"> Catégories</label>
+									<select name="category" id="category" required placeholder="Ajouter une catégorie à votre bot">
+										<%for (var i=0; i<categories.length; i++) {%>
+										<% var val = categories[i]; %>
+										<option value="<%=val%>" <%= bot.categories == val ? 'selected' : '' %>><%=val%></option>
+										<%}%>
+										
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="website">URL site web (HTTPS seulement) (Optionnel)</label>
+									<input type="text" id="website" name="website" value="<%=bot.website%>" class="form-control" maxlength="2000" placeholder="URL site web (HTTPS seulement)" pattern="https?:\/\/.+">
+								</div>
+								<div class="form-group">
+									<label for="github">Github / Gitlab (Optionnel)</label>
+									<input type="text" id="github" name="github" value="<%=bot.github%>" class="form-control" maxlength="2000" placeholder="Adresse du repo GitHub" pattern="https?:\/\/.+">
+								</div>
+								<div id="description" class="form-group">
+									<div class="form-group">
+										<label for="type">Description longue HTML seulement</label>
+										<textarea class="form-control" id="descitype" name="descitype" maxlength="200000" rows="12" required><%=bot.descitype%></textarea>
+										<div id="description" class="form-group"></div>
+									</div>
+									<button class="btn btn-primary" type="submit">Envoyer</button>
+									<input type="text" class="hide" name="<%=csrf%>" value="<%=csrf%>">
+									<input type="number" class="hide" name="count" value="<%=bot.count%>">
+									<input type="number" class="hide" name="shard" value="<%=bot.shard%>">
+									<input type="text" class="hide" name="id" value="<%=bot.id%>">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var test = CodeMirror.fromTextArea(document.getElementById('descitype'),
+	{
+		lineNumbers: true,
+		theme: 'midnight',
+		mode: {
+		name: "htmlmixed"
+	}});
+	test.on("keyup", function (cm, event) {
+		if (!cm.state.completionActive &&   /*Enables keyboard navigation in autocomplete list*/
+		event.keyCode != 13 &&         /*Enter - do not open autocomplete list just after item has been selected in it*/
+		event.keyCode != 16 &&     //not for shift
+		event.keyCode != 17 &&     //not for ctrl
+		event.keyCode != 18 &&     //not for alt
+		event.keyCode != 60 &&     //not for < or >
+		event.keyCode != 32 &&     //not for the space key
+		event.keyCode != 8 &&      //not for the backspace key
+		event.keyCode != 9){       //not for the tab key
+		CodeMirror.commands.autocomplete(cm, null, {completeSingle: false});
+		}
+	});
+	</script>
+</body>

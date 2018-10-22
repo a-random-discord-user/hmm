@@ -1,0 +1,40 @@
+<head>
+	<title>TOKEN | Discordbot.takohell.com</title>
+	<% include ./partials/head %>
+</head>
+<body>
+	<% include ./partials/header %>
+	<div class="<%= theme == 1 ? 'presentation-dark' : 'presentation-light'%>" style="height: 100%">
+		<div style="background-image: url(../../img/patternmid.png); height: 100%">
+			<div class="jumbotron">
+				<div class="container">
+					<p class="lead code">Token pour <%= bot.name %></p>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<p style="padding: 10px">Ce token permet de se connecter à l'API du site, quand cela est requis. Pour plus d'informations à propos de l'API veuillez lire la documentation de l'API.</p>
+						<%if (bot.token){ %>
+						<p style="padding: 10px">
+							<code style="word-break: break-all"><%=bot.token%></code>
+						</p>
+						<%}else{%>
+						<p style="padding: 10px">
+							Vous n'avez pas de token
+						</p>
+						<%}%>
+					</div>
+					<div class="col-12">
+						
+						<form method="POST">
+							<button class="btn btn-danger" type="submit">Génerer un token</button>
+							<input type="text" class="hide" name="<%=csrf%>" value="<%=csrf%>">
+							<input type="text" class="hide" name="approve" value="true">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% include ./partials/footer %>

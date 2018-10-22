@@ -1,0 +1,28 @@
+<head>
+	<title>Supprimer le bot | Discordbots.fr</title>
+	<% include ./partials/head %>
+</head>
+<body>
+	<% include ./partials/header %>
+	<div class="<%= theme == 1 ? 'presentation-dark' : 'presentation-light'%>" style="height: 100%">
+		<div style="background-image: url(../../img/patternmid.png); height: 100%">
+			<div class="jumbotron">
+				<div class="container">
+					<p class="lead code">Êtes vous sur de vouloir supprimer votre bot ?</p>
+				</div>
+			</div>
+			<br>	
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<form method="POST" class="buddon">
+							<button class="mini ui <%= theme == 1 ? 'inverted' : ''%> green button" type="submit">Oui</button>
+							<input type="text" class="hide" name="<%=csrf%>" value="<%=csrf%>">
+							<a href="/" class="mini ui <%= theme == 1 ? 'inverted' : ''%> red button">Non</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

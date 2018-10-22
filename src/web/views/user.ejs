@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Discord bot list FR</title>
+		<% if(bots.length){ %>
+		<% var val = bots[0]; %>
+		<meta name="author" content="<%= val.ownerinfo.username %>#<%= val.ownerinfo.discriminator %>">
+		<%if(val.ownerinfo.avatar && val.owner){ %>
+		<meta name="og:image" content="https://cdn.discordapp.com/avatars/<%= val.ownerinfo.id %>/<%= val.ownerinfo.avatar %>.png?size=256">
+		<%}else {%>
+		<meta name="og:image" content="/img/kyonna.png">
+		<%} %>
+		<meta property="og:title" content="<%= val.ownerinfo.username %>#<%= val.ownerinfo.discriminator %>">
+		<%if(val.users){%>
+		<%if(val.users.bio){%>
+		<meta property="og:description" content="<%=val.users.bio%>">
+		<% }%>
+		<%}}%>
+		<meta property="og:site_name" content="Discord.takohell.com">
+		<% include ./partials/head %>
+	</head>
+	<body>
+		<% include ./partials/header %>
+		<% if(bots.length){ %>
+		<% var val = bots[0]; %>
+		<%if(val.users){%>
+		<%if(!val.users.background) {%>
+		<div class="header-center-mid" style="background-color: #9ca3da;">
+			<%}else{%>
+			<div class="header-center-mid" style="background: url('<%=val.users.background %>');">
+				<%}%>
+				<%}%>
+				<%if(!val.users){%>
+				<div class="header-center-mid" style="background-color: #9ca3da;">
+					<%}%>
+					<div class="container is-widescreen">
+						<div class="columns is-tablet" style="padding-left: 20px;padding-right: 20px;">
+							<div class="column" style="width: 50%">
+								<div id="illustration" >
+									<img src="https://cdn.discordapp.com/avatars/<%= val.ownerinfo.id %>/<%= val.ownerinfo.avatar %>.png?size=256" style="border-radius: 50%">
+								</div>
+							</div>
+							<div class="column is-two-thirds">
+								<% if(user) {%>
+								<% if(user.id == val.ownerinfo.id|| user.admin){%>
+								<a href="/user/<%= user.id%>/edit" class="btn btn-info" style="float: right;">Editer</a>
+								<%} %>
+								<%} %>
+								<h1><%= val.ownerinfo.username %>#<%= val.ownerinfo.discriminator %></h1>
+								<% if(val.users){ %>
+								<h2><%= val.users.bio %></h2>
+								<div>
+									
+									<% if(val.users.github) {%>
+									<a href="https://github.com/<%= val.users.github%>" class="btn" style="border-radius: 50%"><i class="fa fa-github fa-lg"></i></a>
+									<%}%>
+									<% if(val.users.youtube) {%>
+									<a href="https://www.youtube.com/channel/<%= val.users.youtube%>" class="btn btn-danger" style="border-radius: 50%"><i class="fa fa-youtube fa-lg"></i></a>
+									<%}%>
+									<% if(val.users.twitter) {%>
+									<a href="https://twitter.com/<%= val.users.twitter%>" class="btn btn-info" style="border-radius: 50%"><i class="fa fa-twitter fa-lg"></i></a>
+									<%}%>
+									<% if(val.users.facebook) {%>
+									<a href="https://facebook.com/<%= val.users.facebook%>" class="btn btn-primary" style="border-radius: 50%"><i class="fa fa-facebook fa-lg"></i></a>
+									<%}%>
+								</div>
+								<%}else{%>
+								<h2>bio non défini</h2>
+								<%}%>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%}%>
+				<div class="content<%= theme == 1 ? '-dark' : ''%>">
+					<br>
+					<div class="conte is-full" style="background-image: url(../img/patternmid.png)">
+						<div class="bot-sect">
+							<% if(bots.length){ %>
+							<% for(var i=0; i<bots.length; i++){%>
+							<% var val = bots[i]; %>
+							<div class="card <%= theme == 1 ? 'card-dark' : ''%> card--big" style="opacity: 0.85;">
+								<% if(val.avatar){ %>
+								<div class="card__image" style="background-image: url(<%=val.avatar%>.png?size=512)">
+								</div>
+								<%}else {%>
+								<div class="card__image" style="background-image: url(/img/kyonna.png)">
+								</div>
+								<%}%>
+								<h2 class="card__title"><%=val.name %> <%if (!val.approved){%>
+								<span class="mini ui red button left" style="float: right;">Non vérifier</span>
+								<%} %></h2>
+								<div class="card__btn-mid"><!--margin-left: 10px;-->
+								<%if (val.count){ %>
+								<!-- A ajouter pour les status en ligne ou pas pour la suite
+								<span class="status green">ONLINE</span>-->
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> orange button" style="float: left;padding-left: 5px;padding-right: 4px;
+									"><%= val.count %> serveurs
+								</span>
+								<%} %>
+								<%if (val.lib){%>
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> red button" style="padding-left: 5px;padding-right: 4px;float:right;">
+									<%= val.lib%>
+								</span>
+								<%}%>
+								<%if (val.status){%>
+								<% if (val.status == "online") {%>
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> green button" style="padding-left: 5px;padding-right: 4px">
+									<%- val.status%>
+								</span>
+								<%}else if(val.status == "offline"){%>
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> grey button" style="padding-left: 5px;padding-right: 4px">
+									<%- val.status%>
+								</span>
+								<%}else if (val.status == "dnd"){%>
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> red button" style="padding-left: 5px;padding-right: 4px">
+									<%- val.status%>
+								</span>
+								<%}else if(val.status == "idle"){%>
+								<span class="mini ui <%= theme == 1 ? 'inverted' : ''%> orange button" style="padding-left: 5px;padding-right: 4px">
+									<%- val.status%>
+								</span>
+								<%} %>
+								
+								<%}%>
+							</div>
+							<% if (val.shortDesc){%>
+							<p class="card__text <%= theme == 1 ? 'card__text-dark' : ''%>"><%= val.shortDesc %></p>
+							<%}%>
+							<div class="card__action-bar <%= theme == 1 ? 'card__action-bar-dark' : ''%>" style="padding-top: 4px;">
+								<a href="/bot/<%=val.id%>" class="ui <%= theme == 1 ? 'inverted' : ''%> blue button" style="padding-left: 10px;padding-right: 10px;">Info</a>
+								<% if(val.editable) {%>
+								<a href="/bot/<%=val.id%>/edit" class="ui <%= theme == 1 ? 'inverted' : ''%> orange button" style="padding-left: 10px;padding-right: 10px;"> Editer</a>
+								<%}%>
+								<a href="<%=val.invite%>" class="ui <%= theme == 1 ? 'inverted' : ''%> blue button" style="padding-left: 10px;padding-right: 10px;float: right;">Inviter</a>
+							</div>
+						</div>
+						<%}%>
+						
+						<% }else{%>
+						<div class="col-12">
+							<p> Aucun bot</p>
+						</div>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include ./partials/footer %>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+	</body>
+</html>

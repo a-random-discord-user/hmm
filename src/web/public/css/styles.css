@@ -1,0 +1,194 @@
+p {
+  line-height: 1.5;
+}
+code {
+  background: #222;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  padding: 2px 8px;
+  padding-top: 4px;
+  display: inline-block;
+}
+
+/* ======= Doc Styling ======= */
+#doc-nav {
+    display: block;
+    background: none;
+}
+.doc-wrapper {
+  padding: 45px 0;
+}
+.doc-body {
+  position: relative;
+}
+.doc-header {
+  margin-bottom: 30px;
+}
+.doc-header .doc-title {
+  color: #40babd;
+  margin-top: 0;
+  font-size: 36px;
+}
+.body-green .doc-header .doc-title {
+  color: #75c181;
+}
+.doc-header .icon {
+  font-size: 30px;
+}
+.doc-header .meta {
+  color: #a2a6af;
+}
+
+@media (min-width: 768px) {
+  
+.doc-content {
+  margin-left: 230px;
+}
+}
+.doc-section {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.doc-section .section-title {
+  font-size: 26px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d7d7d7;
+}
+.doc-section h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.doc-section h2 {
+  font-size: 22px;
+  font-weight: bold;
+}
+.doc-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.doc-section h4 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.doc-section h5 {
+  font-size: 16px;
+  font-weight: bold;
+}
+.doc-section h6 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.section-block {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.section-block .block-title {
+  margin-top: 0;
+}
+.section-block .list > li {
+  margin-bottom: 10px;
+}
+.section-block .list ul > li {
+  margin-top: 5px;
+}
+/* Color Schemes */
+.body-green .header {
+  border-color: #75c181;
+}
+.body-green a {
+  color: #75c181;
+}
+.body-green a:hover {
+  color: #52b161;
+}
+
+/* Sidebar */
+.doc-sidebar {
+  width: 200px;
+}
+.doc-menu {
+  list-style: none;
+  padding-left: 0;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: rgba(10, 100,  200, 0.2);
+  box-shadow: inset 0px 0px 0px 2px #00a0f0;
+
+}
+.doc-menu > li {
+  margin-bottom: 5px;
+}
+.doc-menu > li > a {
+  display: block;
+  padding: 5px 15px;
+  border-left: 4px solid transparent;
+  color: #616670;
+}
+.doc-menu > li > a:hover,
+.doc-menu > li > a:focus {
+  color: #40babd;
+  text-decoration: none;
+  background: none;
+}
+.body-green .doc-menu > li > a:hover,
+.body-green .doc-menu > li > a:focus {
+  color: #75c181;
+}
+
+.doc-menu > li.active > a {
+  background: none;
+  border-left: 4px solid #40babd;
+  color: #40babd;
+  font-weight: 600;
+}
+.body-green .doc-menu > li.active > a {
+  color: #9ca3da;
+  border-color: #9ca3da;
+}
+
+.doc-sub-menu {
+  list-style: none;
+  padding-left: 0;
+}
+.doc-sub-menu > li {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.doc-sub-menu > li:first-child {
+  padding-top: 5px;
+}
+.doc-sub-menu > li > a {
+  display: block;
+  color: #616670;
+  padding: 0;
+  padding-left: 34px;
+  background: none;
+}
+.doc-sub-menu > li > a:hover {
+  color: #40babd;
+  text-decoration: none;
+  background: none;
+}
+.body-green .doc-sub-menu > li > a:hover {
+  color: #75c181;
+}
+.affix-top {
+  position: absolute;
+  top: 39%;;
+}
+.affix {
+  top: 39%;;
+}
+.affix,
+.affix-bottom {
+  width: 230px;
+}
+.affix-bottom {
+  position: absolute;
+}
+

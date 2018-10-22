@@ -1,0 +1,30 @@
+{
+	"remove": [
+		"autre",
+		"Le propriétaire n'est pas dans le serveur",
+		"Le bot répond aux autres bots",
+		"Le bot répond à lui-même",
+		"Le bot s'est bloqué dans une boucle infini de spam",
+		"Messages de bienvenue",
+		"Envoie des messages aléatoires",
+		"Envoie des publicités",
+		"Spam textuel",
+		"Messages de level-up",
+		"Il n'y a pas de documentation pour utiliser le bot",
+		"Ne répond pas",
+		"Clone d'un autre bot",
+		"Hors-ligne pendant une longue période",
+		"Selfbot",
+		"Le propriétaire utilise le bot pour parler avec",
+		"Le token a été diffusé",
+		"N'a pas de préfix prefix",
+		"A besoin d'un code de validation",
+		"Ne peut pas être invité",
+		"Le lien d'invitation n'invite pas le bot",
+		"Message pour aldulte en dehors des salons adulte",
+		"Messages de commandes inéxistantes",
+		"Ne respecte pas les conditions de service de l'API de Discord  et/ou les conditions de service de Discord",
+		"Atteint les ratelimits de l'API de Discord",
+		"Ne respecte pas les conditions d'utilisation de Discord"
+	]
+}
